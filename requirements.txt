@@ -1,0 +1,2 @@
+nltk
+-e .  # install our code in editing mode

@@ -8,12 +8,13 @@ Instalación
 1. Se necesita el siguiente software:
 
    - Git
-   - Python 3.4 o posterior
    - Pip
+   - Python 3.4 o posterior
+   - TkInter
 
    En un sistema basado en Debian (como Ubuntu), se puede hacer::
 
-    sudo apt-get install git python3.4 python-pip
+    sudo apt-get install git python-pip python3.4 python3-tk
 
 2. Crear y activar un nuevo
    `virtualenv <http://virtualenv.readthedocs.org/en/latest/virtualenv.html>`_.

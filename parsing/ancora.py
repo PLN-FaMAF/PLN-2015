@@ -1,8 +1,7 @@
-
-from nltk.corpus.reader import api
+from nltk.corpus.reader.api import SyntaxCorpusReader
 from nltk.corpus.reader import xmldocs
 from nltk import tree
-from nltk import util
+from nltk.util import LazyMap
 from nltk.corpus.reader.util import concat
 
 
@@ -34,7 +33,7 @@ def untagged(element):
     return filter(lambda x: x is not None, parsed(element).leaves())
 
 
-class AncoraCorpusReader(api.SyntaxCorpusReader):
+class AncoraCorpusReader(SyntaxCorpusReader):
 
     #def __init__(self, xmlreader):
     #    self.xmlreader = xmlreader
@@ -44,18 +43,18 @@ class AncoraCorpusReader(api.SyntaxCorpusReader):
     def parsed_sents(self, fileids=None):
         if not fileids:
             fileids = self.xmlreader.fileids()
-        return util.LazyMap(parsed, concat([list(self.xmlreader.xml(fileid)) for fileid in fileids]))
+        return LazyMap(parsed, concat([list(self.xmlreader.xml(fileid)) for fileid in fileids]))
 
     def tagged_sents(self, fileids=None):
         if not fileids:
             fileids = self.xmlreader.fileids()
-        return util.LazyMap(tagged, concat([list(self.xmlreader.xml(fileid)) for fileid in fileids]))
+        return LazyMap(tagged, concat([list(self.xmlreader.xml(fileid)) for fileid in fileids]))
 
     def sents(self, fileids=None):
         # FIXME: not lazy!
         if not fileids:
             fileids = self.xmlreader.fileids()
-        return util.LazyMap(untagged, concat([list(self.xmlreader.xml(fileid)) for fileid in fileids]))
+        return LazyMap(untagged, concat([list(self.xmlreader.xml(fileid)) for fileid in fileids]))
 
     def tagged_words(self, fileids=None):
         return concat(self.tagged_sents(fileids))

@@ -1,2 +1,4 @@
+flake8
+nose
 nltk
 -e .  # install our code in editing mode

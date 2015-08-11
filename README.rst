@@ -34,9 +34,37 @@ Instalación
 
 3. Bajar el código::
 
-    git clone http://git.cs.famaf.unc.edu.ar/francolq/pln-2015
+    git clone -c http.sslVerify=false https://git.cs.famaf.unc.edu.ar/francolq/pln-2015.git
 
 4. Instalarlo::
 
     cd pln-2015
     pip install -r requirements.txt
+
+
+Ejecución
+---------
+
+1. Activar el entorno virtual con::
+
+    workon pln-2015
+
+2. Correr el script que uno quiera. Por ejemplo::
+
+    python languagemodeling/scripts/train.py -h
+
+
+Testing
+-------
+
+Correr nose::
+
+    nosetests
+
+
+Chequear Estilo de Código
+-------------------------
+
+Correr flake8 sobre el paquete o módulo que se desea chequear. Por ejemplo::
+
+    flake8 languagemodeling

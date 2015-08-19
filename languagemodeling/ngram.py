@@ -27,7 +27,3 @@ class NGram(object):
 
         tokens = prev_tokens + [token]
         return float(self.counts[tuple(tokens)]) / self.counts[tuple(prev_tokens)]
-
-
-class SmoothNGram:
-    pass

@@ -11,10 +11,11 @@ Instalación
    - Pip
    - Python 3.4 o posterior
    - TkInter
+   - Virtualenv
 
    En un sistema basado en Debian (como Ubuntu), se puede hacer::
 
-    sudo apt-get install git python-pip python3.4 python3-tk
+    sudo apt-get install git python-pip python3.4 python3-tk virtualenv
 
 2. Crear y activar un nuevo
    `virtualenv <http://virtualenv.readthedocs.org/en/latest/virtualenv.html>`_.
@@ -22,7 +23,7 @@ Instalación
    <http://virtualenvwrapper.readthedocs.org/en/latest/install.html#basic-installation>`_.
    Se puede instalar así::
 
-    pip install virtualenvwrapper
+    sudo pip install virtualenvwrapper
 
    Y luego agregando la siguiente línea al final del archivo ``.bashrc``::
 
@@ -34,7 +35,7 @@ Instalación
 
 3. Bajar el código::
 
-    git clone -c http.sslVerify=false https://git.cs.famaf.unc.edu.ar/francolq/pln-2015.git
+    git clone https://github.com/PLN-FaMAF/PLN-2015.git
 
 4. Instalarlo::
 

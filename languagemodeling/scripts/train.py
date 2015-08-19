@@ -19,17 +19,16 @@ from languagemodeling.ngram import NGram
 
 if __name__ == '__main__':
     opts = docopt(__doc__)
-    print(opts)
 
     # load the data
     sents = gutenberg.sents('austen-emma.txt')
 
     # train the model
-    n = opts['-n']
-    model = NGrams(n, sents)
+    n = int(opts['-n'])
+    model = NGram(n, sents)
 
     # save it
     filename = opts['-o']
-    f = open(filename, 'w')
+    f = open(filename, 'wb')
     pickle.dump(model, f)
     f.close()

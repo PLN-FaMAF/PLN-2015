@@ -9,7 +9,7 @@ Options:
 """
 from docopt import docopt
 
-from ancora import SimpleAncoraCorpusReader
+from corpus.ancora import SimpleAncoraCorpusReader
 
 
 if __name__ == '__main__':

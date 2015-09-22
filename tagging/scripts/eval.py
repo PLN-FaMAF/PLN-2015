@@ -10,7 +10,6 @@ Options:
 """
 from docopt import docopt
 import pickle
-import math
 import sys
 
 from corpus.ancora import SimpleAncoraCorpusReader

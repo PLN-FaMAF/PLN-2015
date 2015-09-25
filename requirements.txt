@@ -2,4 +2,6 @@ flake8
 nose
 docopt
 nltk
+scikit-learn
+featureforge
 -e .  # install our code in editing mode

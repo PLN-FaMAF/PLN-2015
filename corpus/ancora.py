@@ -82,8 +82,7 @@ class AncoraCorpusReader(SyntaxCorpusReader):
         return LazyConcatenation(self.xmlreader.xml(f) for f in fileids)
 
     def tagged_words(self, fileids=None):
-        # XXX: use LazyConcatenation?
-        return concat(self.tagged_sents(fileids))
+        return LazyConcatenation(self.tagged_sents(fileids))
 
     def __repr__(self):
         return '<AncoraCorpusReader>'

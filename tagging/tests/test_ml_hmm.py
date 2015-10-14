@@ -63,12 +63,10 @@ class TestMLHMM(TestCase):
         hmm = MLHMM(2, self.tagged_sents)
 
         tcount = {
-            (): 12,
             ('D',): 2,
             ('N',): 4,
             ('V',): 2,
             ('P',): 2,
-            ('</s>',): 2,
             ('D', 'N'): 2,
             ('N', 'V'): 2,
             ('V', 'N'): 2,

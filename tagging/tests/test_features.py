@@ -166,12 +166,12 @@ class TestFeatures(TestCase):
         sent0 = 'El gato come pescado .'.split()
         sent1 = 'La gata come salmón .'.split()
         feature_values = [
-            (History(sent0, ('<s>', '<s>'), 0), 'BOS'),
+            (History(sent0, ('<s>', '<s>'), 0), 'BOS'),  # beginning of sentence
             (History(sent0, ('<s>', 'D'), 1), 'el'),
             (History(sent0, ('D', 'N'), 2), 'gato'),
             (History(sent0, ('N', 'V'), 3), 'come'),
             (History(sent0, ('V', 'N'), 4), 'pescado'),
-            (History(sent1, ('<s>', '<s>'), 0), 'BOS'),
+            (History(sent1, ('<s>', '<s>'), 0), 'BOS'),  # beginning of sentence
             (History(sent1, ('<s>', 'D'), 1), 'la'),
             (History(sent1, ('D', 'N'), 2), 'gata'),
             (History(sent1, ('N', 'V'), 3), 'come'),

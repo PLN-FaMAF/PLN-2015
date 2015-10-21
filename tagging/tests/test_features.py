@@ -179,3 +179,23 @@ class TestFeatures(TestCase):
         ]
         for h, v in feature_values:
             self.assertEqual(prev_word_lower(h), v)
+
+    def test_prev_word_istitle(self):
+        prev_word_istitle = PrevWord(word_istitle)
+
+        sent0 = 'EL gato come pescado .'.split()
+        sent1 = 'La gata come SALMÓN .'.split()
+        feature_values = [
+            (History(sent0, ('<s>', '<s>'), 0), 'BOS'),
+            (History(sent0, ('<s>', 'D'), 1), 'False'),
+            (History(sent0, ('D', 'N'), 2), 'False'),
+            (History(sent0, ('N', 'V'), 3), 'False'),
+            (History(sent0, ('V', 'N'), 4), 'False'),
+            (History(sent1, ('<s>', '<s>'), 0), 'BOS'),
+            (History(sent1, ('<s>', 'D'), 1), 'True'),
+            (History(sent1, ('D', 'N'), 2), 'False'),
+            (History(sent1, ('N', 'V'), 3), 'False'),
+            (History(sent1, ('V', 'N'), 4), 'False'),
+        ]
+        for h, v in feature_values:
+            self.assertEqual(prev_word_istitle(h), v)

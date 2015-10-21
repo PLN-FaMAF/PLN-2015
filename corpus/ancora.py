@@ -98,3 +98,15 @@ class SimpleAncoraCorpusReader(AncoraCorpusReader):
     def tagged_sents(self, fileids=None):
         f = lambda s: [(w, t[:2]) for w, t in s]
         return LazyMap(f, super().tagged_sents(fileids))
+
+    def parsed_sents(self, fileids=None):
+        def f(t):
+            for p in t.treepositions('leaves'):
+                if len(p) > 1:
+                    tag = t[p[:-1]].label()
+                    t[p[:-1]].set_label(tag[:2])
+                else:
+                    print(t)
+            return t
+
+        return LazyMap(f, super().parsed_sents(fileids))

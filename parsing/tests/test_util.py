@@ -3,7 +3,7 @@ from unittest import TestCase
 
 from nltk.tree import Tree
 
-from parsing.util import unlexicalize, spans
+from parsing.util import unlexicalize, lexicalize, spans
 
 
 class TestSpans(TestCase):
@@ -20,7 +20,6 @@ class TestSpans(TestCase):
         s = spans(t)
 
         s2 = {('S', 0, 4), ('NP', 0, 1), ('VP', 2, 4), ('NP', 3, 4)}
-
         self.assertEqual(s, s2)
 
     def test_spans_doesnt_change_tree(self):
@@ -49,7 +48,6 @@ class TestSpans(TestCase):
         s = spans(t, unary=True)
 
         s2 = {('S', 0, 3), ('NP', 0, 1), ('VP', 2, 3), ('NP', 3, 3)}
-
         self.assertEqual(s, s2)
 
 
@@ -73,5 +71,69 @@ class TestUnlexicalize(TestCase):
                     (VP (Verb Verb) (NP (Noun Noun) (Adj Adj)))
                 )
             """)
-
         self.assertEqual(ut, ut2)
+
+    def test_unlexicalize_does_change_tree(self):
+        t = Tree.fromstring(
+            """
+                (S
+                    (NP (Det el) (Noun gato))
+                    (VP (Verb come) (NP (Noun pescado) (Adj crudo)))
+                )
+            """)
+
+        unlexicalize(t)
+
+        ut2 = Tree.fromstring(
+            """
+                (S
+                    (NP (Det Det) (Noun Noun))
+                    (VP (Verb Verb) (NP (Noun Noun) (Adj Adj)))
+                )
+            """)
+        self.assertEqual(t, ut2)
+
+
+class TestLexicalize(TestCase):
+
+    def test_lexicalize(self):
+        t = Tree.fromstring(
+            """
+                (S
+                    (NP (Det Det) (Noun Noun))
+                    (VP (Verb Verb) (NP (Noun Noun) (Adj Adj)))
+                )
+            """)
+        sent = 'el gato come pescado crudo'.split()
+
+        ut = lexicalize(t, sent)
+
+        ut2 = Tree.fromstring(
+            """
+                (S
+                    (NP (Det el) (Noun gato))
+                    (VP (Verb come) (NP (Noun pescado) (Adj crudo)))
+                )
+            """)
+        self.assertEqual(ut, ut2)
+
+    def test_lexicalize_does_change_tree(self):
+        t = Tree.fromstring(
+            """
+                (S
+                    (NP (Det Det) (Noun Noun))
+                    (VP (Verb Verb) (NP (Noun Noun) (Adj Adj)))
+                )
+            """)
+        sent = 'el gato come pescado crudo'.split()
+
+        lexicalize(t, sent)
+
+        ut2 = Tree.fromstring(
+            """
+                (S
+                    (NP (Det el) (Noun gato))
+                    (VP (Verb come) (NP (Noun pescado) (Adj crudo)))
+                )
+            """)
+        self.assertEqual(t, ut2)

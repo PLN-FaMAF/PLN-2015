@@ -105,8 +105,6 @@ class SimpleAncoraCorpusReader(AncoraCorpusReader):
                 if len(p) > 1:
                     tag = t[p[:-1]].label()
                     t[p[:-1]].set_label(tag[:2])
-                else:
-                    print(t)
             return t
 
         return LazyMap(f, super().parsed_sents(fileids))

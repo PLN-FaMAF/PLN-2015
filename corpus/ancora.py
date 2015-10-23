@@ -13,12 +13,12 @@ def parsed(element):
     """
     if element:
         # element viewed as a list is non-empty (it has subelements)
-        subtrees = map(parsed, element)
+        subtrees = map(parsed, element)  # recursive call here!
         subtrees = [t for t in subtrees if t is not None]
         return tree.Tree(element.tag, subtrees)
     else:
         # element viewed as a list is empty. we are in a terminal.
-        if element.get('elliptic') == 'yes':
+        if element.get('elliptic') == 'yes' and not element.get('wd'):
             return None
         else:
             return tree.Tree(element.get('pos') or element.get('ne') or 'unk',

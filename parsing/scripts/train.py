@@ -7,6 +7,8 @@ Usage:
 Options:
   -m <model>    Model to use [default: upcfg]:
                   flat: Flat trees
+                  rbranch: Right branching trees
+                  lbranch: Left branching trees
   -o <file>     Output model file.
   -h --help     Show this screen.
 """
@@ -15,11 +17,13 @@ import pickle
 
 from corpus.ancora import SimpleAncoraCorpusReader
 
-from parsing.baselines import Flat
+from parsing.baselines import Flat, RBranch, LBranch
 
 
 models = {
     'flat': Flat,
+    'rbranch': RBranch,
+    'lbranch': LBranch,
 }
 
 

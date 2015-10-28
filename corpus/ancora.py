@@ -96,7 +96,7 @@ class SimpleAncoraCorpusReader(AncoraCorpusReader):
         super().__init__(path, files)
 
     def tagged_sents(self, fileids=None):
-        f = lambda s: [(w, t[:2]) for w, t in s]
+        f = lambda s: [(w, t[:3]) for w, t in s]
         return LazyMap(f, super().tagged_sents(fileids))
 
     def parsed_sents(self, fileids=None):
@@ -104,7 +104,7 @@ class SimpleAncoraCorpusReader(AncoraCorpusReader):
             for p in t.treepositions('leaves'):
                 if len(p) > 1:
                     tag = t[p[:-1]].label()
-                    t[p[:-1]].set_label(tag[:2])
+                    t[p[:-1]].set_label(tag[:3])
             return t
 
         return LazyMap(f, super().parsed_sents(fileids))

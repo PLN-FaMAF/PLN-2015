@@ -5,7 +5,7 @@ Usage:
   train.py -h | --help
 
 Options:
-  -m <model>    Model to use [default: upcfg]:
+  -m <model>    Model to use [default: flat]:
                   flat: Flat trees
                   rbranch: Right branching trees
                   lbranch: Left branching trees

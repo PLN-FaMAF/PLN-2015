@@ -13,12 +13,12 @@ def parsed(element):
     """
     if element:
         # element viewed as a list is non-empty (it has subelements)
-        subtrees = map(parsed, element)
+        subtrees = map(parsed, element)  # recursive call here!
         subtrees = [t for t in subtrees if t is not None]
         return tree.Tree(element.tag, subtrees)
     else:
         # element viewed as a list is empty. we are in a terminal.
-        if element.get('elliptic') == 'yes':
+        if element.get('elliptic') == 'yes' and not element.get('wd'):
             return None
         else:
             return tree.Tree(element.get('pos') or element.get('ne') or 'unk',
@@ -96,5 +96,15 @@ class SimpleAncoraCorpusReader(AncoraCorpusReader):
         super().__init__(path, files)
 
     def tagged_sents(self, fileids=None):
-        f = lambda s: [(w, t[:2]) for w, t in s]
+        f = lambda s: [(w, t[:3]) for w, t in s]
         return LazyMap(f, super().tagged_sents(fileids))
+
+    def parsed_sents(self, fileids=None):
+        def f(t):
+            for p in t.treepositions('leaves'):
+                if len(p) > 1:
+                    tag = t[p[:-1]].label()
+                    t[p[:-1]].set_label(tag[:3])
+            return t
+
+        return LazyMap(f, super().parsed_sents(fileids))
